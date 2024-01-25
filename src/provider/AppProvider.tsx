@@ -6,6 +6,10 @@ interface User {
   email: string;
 }
 
+interface Context
+
 const defaultValue = {};
 
 const AppProvider = createContext(defaultValue);
+
+const  
