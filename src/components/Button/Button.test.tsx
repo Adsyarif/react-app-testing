@@ -7,6 +7,14 @@ describe("Unit Testing Button Component", () => {
   // Use render directly inside the test, not outside
   test("Expect Button Render Correctly", () => {
     // Render the component
+    const document = render(<Button />);
+
+    // Expect the button to be defined
+    expect(document).toMatchSnapshot();
+  });
+
+  test("Expect Button Render Correctly", () => {
+    // Render the component
     render(<Button />);
 
     // Use getByRole to check if a button is present

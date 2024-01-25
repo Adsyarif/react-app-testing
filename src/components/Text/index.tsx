@@ -1,7 +1,15 @@
-const Text = () => {
+import { ReactNode } from "react";
+
+interface Props {
+  clasName?: string;
+  children: ReactNode;
+  id?: string;
+}
+
+const Text = ({ clasName, children, id }: Props) => {
   return (
-    <p id="testing" className="class-testing">
-      Testing Element
+    <p id={id} className={clasName}>
+      {children}
     </p>
   );
 };
