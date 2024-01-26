@@ -1,4 +1,11 @@
-import { createContext } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 
 interface User {
   firstName: string;
@@ -6,10 +13,34 @@ interface User {
   email: string;
 }
 
-interface Context
+interface Context {
+  user?: User;
+  setUser?: Dispatch<SetStateAction<User | undefined>>;
+}
 
-const defaultValue = {};
+const defaultValue: Context = {
+  user: undefined,
+  setUser: undefined,
+};
 
-const AppProvider = createContext(defaultValue);
+interface Props {
+  children: ReactNode;
+}
 
-const  
+export const AppContext = createContext(defaultValue);
+
+const AppProvider = ({ children }: Props) => {
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const value = { user, setUser };
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+};
+
+export const useUser = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("usesUser must be used within a AppProvider");
+  }
+  return context;
+};
+
+export default AppProvider;
